@@ -1,7 +1,10 @@
 module CommRing where
 
-open import MLTT.Spartan
+open import MLTT.Spartan hiding (_+_)
 open import UF.Sets
+
+⟨_⟩ : {S : 𝓤 ̇ → 𝓥 ̇ } → Σ S → 𝓤 ̇
+⟨ X , s ⟩ = X
 
 record comm-ring-axioms {X : 𝓤 ̇ } (0r 1r : X) (_+_ : X → X → X) (_*_ : X → X → X) (- : X → X) : 𝓤 ̇ where
   no-eta-equality
@@ -24,10 +27,14 @@ record comm-ring-axioms {X : 𝓤 ̇ } (0r 1r : X) (_+_ : X → X → X) (_*_ : 
 record comm-ring-on (X : 𝓤 ̇ ) : 𝓤 ̇ where
   field
     0r 1r : X
-    add : X → X → X
-    mul : X → X → X
-    neg : X → X
-    is-comm-ring : comm-ring-axioms 0r 1r add mul neg
+    _+_ : X → X → X
+    _*_ : X → X → X
+    -_ : X → X
+    is-comm-ring : comm-ring-axioms 0r 1r _+_ _*_ -_
+
+  infixl 20 _+_
+  infixl 30 _*_
+  infix 40 -_
 
 CommRing : (𝓤 : Universe) → 𝓤 ⁺  ̇
 CommRing 𝓤 = Σ X ꞉ 𝓤 ̇ , comm-ring-on X
