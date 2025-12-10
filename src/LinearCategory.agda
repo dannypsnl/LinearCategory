@@ -15,7 +15,7 @@ record category-structure (𝓤 𝓥 : Universe) : (𝓤 ⊔ 𝓥)⁺ ̇ where
 
   infixl 30 _⨾_
 
-module addition-notation (R : CommRing 𝓥) (str : category-structure 𝓤 𝓥) where
+module notation (R : CommRing 𝓥) (str : category-structure 𝓤 𝓥) where
   addition : (H : 𝓥 ̇ ) → module-on R H → H → H → H
   addition H M = module-on._+_ M
 
@@ -29,7 +29,7 @@ module addition-notation (R : CommRing 𝓥) (str : category-structure 𝓤 𝓥
 record linear-precategory-axioms (R : CommRing 𝓥) (str : category-structure 𝓤 𝓥) : 𝓤 ⊔ 𝓥 ̇ where
   no-eta-equality
   open category-structure str
-  open addition-notation R str
+  open notation R str
   open comm-ring-on (R .pr₂) renaming (_*_ to _*ᴿ_; _+_ to _+ᴿ_)
   field
     homMod : (A B : ob) → module-on R (hom A B)
