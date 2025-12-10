@@ -6,6 +6,7 @@ open import CommRing
 open import Module
 
 record algebra-axioms {R : CommRing 𝓤} {V : 𝓤 ̇ } (str : module-on R V) (_*_ : V → V → V) : 𝓤 ̇ where
+  no-eta-equality
   open comm-ring-on (R .pr₂) renaming (_*_ to _*ᴿ_; _+_ to _+ᴿ_; -_ to -ᴿ_)
   open module-on str
   field
